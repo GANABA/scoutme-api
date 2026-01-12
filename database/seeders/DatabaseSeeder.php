@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use PHPUnit\Framework\Constraint\Count;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Ordre important : les tables de référence d'abord
+        $this->call([
+            CountriesSeeder::class,
+            PositionsSeeder::class,
+            ClubSeeder::class,
+            // Ajouter ici plus tard : ClubsSeeder si besoin
         ]);
     }
 }
