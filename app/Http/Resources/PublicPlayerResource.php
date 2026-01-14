@@ -35,6 +35,7 @@ class PublicPlayerResource extends JsonResource
             'id' => $this->id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'role' => 'joueur',
             // Email masqué pour les non-authentifiés
             'photo_profil' => $joueur->photo_profil,
 

@@ -23,9 +23,14 @@ class UserResource extends JsonResource
 
         // Retourner la resource appropriée selon le rôle
         if ($this->role === 'joueur') {
-            return $isOwner || $request->user()?->estRecruteur()
+            $data = $isOwner || $request->user()?->estRecruteur()
                 ? (new PrivatePlayerResource($this))->toArray($request)
                 : (new PublicPlayerResource($this))->toArray($request);
+
+            // S'assurer que le rôle est bien 'joueur' dans la réponse
+            $data['role'] = 'joueur';
+
+            return $data;
         }
 
         if ($this->role === 'recruteur') {
